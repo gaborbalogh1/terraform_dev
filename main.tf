@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 # Create EC2 instance
-resource "aws_instance" "Dev-Instance1" {
+resource "aws_instance" "Dev-mirror" {
   ami                    = var.ami
   count                  = var.instance_count
   key_name               = var.key_name
@@ -21,7 +21,7 @@ resource "aws_instance" "Dev-Instance1" {
   instance_type          = var.instance_type
 
   tags = {
-    Name = "terraform-Dev-Instance1"
+    Name = "terraform-Dev-mirror"
   }
 }
 
