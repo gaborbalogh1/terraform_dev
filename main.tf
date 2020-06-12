@@ -13,7 +13,7 @@ provider "aws" {
 
 # Create EC2 instance
 resource "aws_instance" "Dev-mirror" {
-  ami                    = var.ami
+  ami                    = var.rhel
   count                  = var.instance_count
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.Terraform_Dev-Servers.id]
@@ -27,7 +27,7 @@ resource "aws_instance" "Dev-mirror" {
 
 resource "aws_instance" "Dev-Instance2" {
 
-  ami = "ami-01a6e31ac994bbc09"
+  ami = var.rhel
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.Terraform_Dev-Servers.id]
   source_dest_check      = false
@@ -43,7 +43,7 @@ resource "aws_instance" "Dev-Instance2" {
 
 resource "aws_instance" "Dev-Instance3" {
 
-  ami = "ami-01a6e31ac994bbc09"
+  ami = var.ubuntu
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.Terraform_Dev-Servers.id]
   source_dest_check      = false
@@ -60,7 +60,7 @@ resource "aws_instance" "Dev-Instance3" {
 
 resource "aws_instance" "Dev-Instance4" {
 
-  ami = "ami-01a6e31ac994bbc09"
+  ami = var.rhel
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.terraform_Dev.id]
   source_dest_check      = false
@@ -76,7 +76,7 @@ resource "aws_instance" "Dev-Instance4" {
 
 resource "aws_instance" "Dev-PwsLinux" {
 
-  ami = "ami-06b6dafd50fc45e21"
+  ami = var.suse
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.terraform_Dev.id]
   source_dest_check      = false
