@@ -3,8 +3,8 @@ variable "instance_count" {
 }
 
 variable "key_name" {
-  description = "Jenkins"
-  default     = "Jenkins"
+  description = "Dev_Test_Only"
+  default     = "AWS_Terraform_default"
 }
 
 variable "instance_type" {
