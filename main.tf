@@ -12,88 +12,88 @@ provider "aws" {
 }
 
 # Create EC2 instance
-resource "aws_instance" "default" {
+resource "aws_instance" "Dev-Instance1" {
   ami                    = var.ami
   count                  = var.instance_count
   key_name               = var.key_name
-  vpc_security_group_ids = [aws_security_group.default.id]
+  vpc_security_group_ids = [aws_security_group.Terraform_Dev-Servers.id]
   source_dest_check      = false
   instance_type          = var.instance_type
 
   tags = {
-    Name = "terraform-default"
+    Name = "terraform-Dev-Instance1"
   }
 }
 
-resource "aws_instance" "example" {
+resource "aws_instance" "Dev-Instance2" {
 
   ami = "ami-01a6e31ac994bbc09"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Terraform_Examples.id]
+  vpc_security_group_ids = [aws_security_group.Terraform_Dev-Servers.id]
   source_dest_check      = false
   tags = {
-    Name = "terraform-Example1"
+    Name = "terraform-Dev-Instance2"
   }
 	
   provisioner "local-exec" {
-    command = "echo ${aws_instance.example.public_ip} > ip_address.txt"
+    command = "echo ${aws_instance.Dev-Instance2.public_ip} > ip_address.txt"
   }
 
 }
 
-resource "aws_instance" "example2" {
+resource "aws_instance" "Dev-Instance3" {
 
   ami = "ami-01a6e31ac994bbc09"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Terraform_Examples.id]
+  vpc_security_group_ids = [aws_security_group.Terraform_Dev-Servers.id]
   source_dest_check      = false
 
   tags = {
-    Name = "terraform-Example2"
+    Name = "terraform-Dev-Instance3"
   }
   provisioner "local-exec" {
-    command = "echo ${aws_instance.example2.public_ip} > ip_address.txt"
+    command = "echo ${aws_instance.Dev-Instance3.public_ip} > ip_address.txt"
   }
 
 }
 
 
-resource "aws_instance" "example3" {
+resource "aws_instance" "Dev-Instance4" {
 
   ami = "ami-01a6e31ac994bbc09"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Terraform_Examples.id]
+  vpc_security_group_ids = [aws_security_group.terraform_Dev.id]
   source_dest_check      = false
   tags = {
-    Name = "terraform-Example3"
+    Name = "terraform-Dev-Instance4"
   }
 	
   provisioner "local-exec" {
-    command = "echo ${aws_instance.example3.public_ip} > ip_address.txt"
+    command = "echo ${aws_instance.Dev-Instance4.public_ip} > ip_address.txt"
   }
 
 }
 
-resource "aws_instance" "PwsLinux" {
+resource "aws_instance" "Dev-PwsLinux" {
 
   ami = "ami-06b6dafd50fc45e21"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.Terraform_Examples.id]
+  vpc_security_group_ids = [aws_security_group.terraform_Dev.id]
   source_dest_check      = false
 	
   tags = {
-    Name = "terraform-PwsLinux"
+    Name = "terraform-Dev-PwsLinux"
   }
 	
   provisioner "local-exec" {
-    command = "echo ${aws_instance.PwsLinux.public_ip} > ip_address.txt"	
+    command = "echo ${aws_instance.Dev-PwsLinux.public_ip} > ip_address.txt"	
   }
 
 }
 
 # Create Security Group for EC2
-resource "aws_security_group" "default" {
-  name = "terraform-default-sg"
+resource "aws_security_group" "terraform_Dev" {
+  name = "terraform-Dev-sg"
 
   ingress {
     from_port   = 80
@@ -108,12 +108,19 @@ resource "aws_security_group" "default" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+	
+   ingress {
+    from_port   = 443
+    to_port     = 8443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+	
 }
 
 # Create Security Group for EC2_v2
-resource "aws_security_group" "Terraform_Examples" {
-  name = "terraform-Terraform_Examples-sg"
+resource "aws_security_group" "Terraform_Dev-Servers" {
+  name = "terraform-Terraform_Dev-Servers-sg"
 
   ingress {
     from_port   = 80
