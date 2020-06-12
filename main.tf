@@ -1,9 +1,9 @@
 # Terraform state will be stored in S3
 terraform {
   backend "s3" {
-    bucket = "terraform-bucket-gabor"
+    bucket = "terraform-dev-gabor"
     key    = "terraform.tfstate"
-    region = "eu-west-2"
+    region = "eu-central-1"
   }
 }
 
