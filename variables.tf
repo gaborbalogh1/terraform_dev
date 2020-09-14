@@ -19,7 +19,7 @@ variable "rhel" {
   default = "ami-07dfba995513840b5"
 }
 
-variable "suse" {
+variable "RHEL2" {
   description = "Base AMI to launch the instances"
 
   # change this to RHEL free tier
